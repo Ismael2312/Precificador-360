@@ -1,0 +1,219 @@
+<!-- MIT License
+
+Copyright (c) 2025 Ismael Vitor da Silva
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Precificadora PRO 360º - Maker & Seller</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+       
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📊 Precificadora 360º</h1>
+        <button id="theme-toggle" class="btn-theme">🌙 Alternar Tema</button>
+    </div>
+
+    <div class="card mode-card" style="margin-bottom: 15px;">
+        <label style="font-size: 1.1em; color: var(--purple); margin-top: 0;">🏷️ Nome do Produto / Anúncio:</label>
+        <input type="text" id="nome_produto" placeholder="Ex: Vaso Robert Plant Médio..." style="font-size: 1.2em; font-weight: bold; border: 2px solid var(--purple); margin-bottom: 15px;">
+
+        <div class="input-row">
+            <div style="flex: 2;">
+                <label style="color: var(--purple);">📍 Tipo de Produção:</label>
+                <select id="tipo_produto" style="font-weight: bold; color: var(--purple);">
+                    <option value="3d">🖨️ Impressão 3D (Filamento)</option>
+                    <option value="fabricacao">🔨 Fabricação Manual / Artesanato</option>
+                    <option value="revenda">✈️ Revenda / Importado</option>
+                </select>
+            </div>
+            <div style="flex: 1;">
+                <label style="color: var(--success);">📦 Vendas p/ Mês:</label>
+                <input type="number" id="qtd_mensal" value="50" style="font-weight: bold; border: 2px solid var(--success);">
+            </div>
+        </div>
+    </div>
+
+    <div class="no-print">
+        <div class="grid">
+            <div class="card">
+                <h2>1. Estrutura de Venda</h2>
+                
+                <label>Emite Nota Fiscal?</label>
+                <select id="paga_imposto">
+                    <option value="nao">Não (CPF/MEI)</option>
+                    <option value="sim">Sim (Simples Nacional)</option>
+                </select>
+                <div id="div_imposto" class="hidden">
+                    <label>Alíquota da NF (%):</label>
+                    <input type="number" id="imposto" value="6.0" step="0.5">
+                </div>
+
+                <label style="margin-top: 20px;">Plataforma / Marketplace:</label>
+                <select id="plataforma">
+                    <option value="ml_classico">Mercado Livre (Clássico)</option>
+                    <option value="ml_premium">Mercado Livre (Premium)</option>
+                    <option value="shopee">Shopee</option>
+                    <option value="outro">Outro/Personalizado</option>
+                </select>
+                
+                <div class="input-row">
+                    <div><label>Comissão (%):</label><input type="number" id="comissao" value="14"></div>
+                    <div><label>Taxa Fixa (R$):</label><input type="number" id="taxa_fixa" value="6"></div>
+                </div>
+                <label>Frete por sua conta (R$):</label>
+                <input type="number" id="frete" value="0">
+            </div>
+
+            <div class="card">
+                <h2>2. Custos de Produção</h2>
+                
+                <div id="bloco_3d">
+                    <div class="input-row">
+                        <div><label>Preço Rolo (R$):</label> <input type="number" id="preco_rolo" value="120"></div>
+                        <div><label>Peso Rolo (g):</label> <input type="number" id="peso_rolo" value="1000"></div>
+                    </div>
+                    <div class="input-row">
+                        <div><label>Uso na Peça (g):</label> <input type="number" id="consumo_peca" value="150"></div>
+                        <div><label>Tempo (horas):</label> <input type="number" id="tempo" value="8" step="0.5"></div>
+                    </div>
+                    <div class="input-row">
+                        <div><label>Potência (W):</label> <input type="number" id="potencia" value="300"></div>
+                        <div><label>Custo kWh (R$):</label> <input type="number" id="kwh" value="0.95" step="0.05"></div>
+                    </div>
+                    <label>Falha / Refugo (%):</label> <input type="number" id="falha_3d" value="10">
+                </div>
+
+                <div id="bloco_fabricacao" class="hidden">
+                    <label>Custo Material Bruto (R$):</label> <input type="number" id="custo_materiais_fab" value="35.00">
+                    <div class="input-row">
+                        <div><label>Tempo (horas):</label> <input type="number" id="tempo_fab" value="2.5"></div>
+                        <div><label>Valor Hora (R$):</label> <input type="number" id="hora_fab" value="30.00"></div>
+                    </div>
+                    <label>Insumos/Desgaste (R$ fixo):</label> <input type="number" id="insumos_fab" value="5.00">
+                </div>
+
+                <div id="bloco_revenda" class="hidden">
+                    <label>Custo de Compra (R$):</label> <input type="number" id="custo_compra" value="35.00">
+                    <div class="input-row">
+                        <div><label>Frete Rateado (R$):</label> <input type="number" id="frete_chegada" value="5.00"></div>
+                        <div><label>Alfândega (R$):</label> <input type="number" id="taxa_alfandega" value="7.50"></div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px; border-top: 1px dashed var(--border); padding-top: 15px;">
+                    <div class="input-row">
+                        <div><label>Embalagem (R$):</label> <input type="number" id="custo_embalagem" value="2.50"></div>
+                        <div><label>Seu tempo pacote (min):</label> <input type="number" id="tempo_operador" value="10"></div>
+                    </div>
+                    <label>Valor Hora Administrativa (R$/h):</label> <input type="number" id="valor_hora" value="25.00">
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>3. Estratégia Final</h2>
+                
+                <label style="color: var(--warning);">📢 Verba p/ Marketing / Ads (%):</label>
+                <input type="number" id="ads" value="0" style="border: 2px solid var(--warning); font-weight: bold;">
+                <small style="opacity: 0.7; font-size: 0.8em; display: block; margin-top: 5px;">Garante o lucro mesmo ligando Mercado Ads.</small>
+
+                <label style="color: var(--accent); font-size: 1.1em; margin-top: 20px;">🎯 Margem de Lucro Desejada (%):</label>
+                <input type="number" id="margem" value="20" style="border: 2px solid var(--accent); font-weight: bold; font-size: 1.2em;">
+                <small style="opacity: 0.7; font-size: 0.8em; display: block; margin-top: 5px;">Seu dinheiro limpo no bolso por peça.</small>
+            </div>
+        </div>
+
+        <div class="card highlight-card">
+            <div id="msg_erro" class="error">⚠️ Erro: As taxas + Ads + Imposto + Margem passam de 100%. Reduza a margem ou o marketing.</div>
+            
+            <div id="resultado_final">
+                <div class="result-box">
+                    <h3 style="margin-top: 0;">Unidade (1 peça)</h3>
+                    <p style="font-size: 1.2em;">Preço de Venda Sugerido: <span class="metric" id="out_preco">R$ 0,00</span></p>
+                    <p>Seu Lucro Líquido: <span id="out_lucro" style="color: var(--success); font-weight: bold; font-size: 1.2em;">R$ 0,00</span></p>
+                    <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 10px 0;">
+                    <p style="font-size: 0.85em; opacity: 0.8; margin-bottom: 0;">Custo Base: <span id="out_custo_base">R$ 0,00</span> | Taxas+MK: <span id="out_taxas_mk">R$ 0,00</span> | Marketing (Ads): <span id="out_verba_ads" style="color: var(--warning);">R$ 0,00</span></p>
+                </div>
+
+                <div class="monthly-box">
+                    <h3 style="margin-top: 0; color: var(--success);">📈 Projeção do Anúncio (<span id="out_qtd_span">0</span> un/mês)</h3>
+                    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <div>Faturamento:<br><strong id="proj_faturamento">R$ 0,00</strong></div>
+                        <div style="text-align: right;">Lucro do Mês:<br><strong id="proj_lucro" style="font-size: 1.4em; color: var(--success);">R$ 0,00</strong></div>
+                    </div>
+                </div>
+                
+                <button id="btn_salvar" class="action-btn">💾 Salvar no Dashboard Abaixo</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="area_tabela_salvos" style="margin-top: 20px; padding: 0; border: 2px solid var(--dash-bg); overflow: hidden;">
+        
+        <div class="dashboard-total" style="border-radius: 0; margin-bottom: 0;">
+            <div>
+                <h2>💼 Dashboard de Negócios</h2>
+                <span style="opacity: 0.8; font-size: 0.9em;">Soma projetada de toda a carteira</span>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 0.9em; opacity: 0.9;">Lucro Mensal Total Projetado</div>
+                <div class="big-number" id="dash_lucro_total">R$ 0,00</div>
+            </div>
+        </div>
+
+        <div style="padding: 15px;">
+            <div class="table-responsive">
+                <table id="tabela_produtos">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Plataf.</th>
+                            <th>Preço (R$)</th>
+                            <th>Lucro Un.</th>
+                            <th>Qtd/Mês</th>
+                            <th>Total Mês</th>
+                            <th class="no-print" style="text-align: center;">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo_tabela">
+                        </tbody>
+                </table>
+            </div>
+            
+            <div class="btn-group">
+                <button onclick="exportarExcel()" class="btn-export excel">📊 Baixar Planilha</button>
+                <button onclick="window.print()" class="btn-export pdf">📄 Imprimir Relatório</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

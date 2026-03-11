@@ -1,0 +1,90 @@
+ /* Variáveis de Cores - Modo Claro */
+        :root {
+            --primary: #0f172a; --accent: #2563eb; --success: #16a34a; --warning: #ea580c; 
+            --purple: #7c3aed; --teal: #0d9488; --bg: #f8fafc; --card-bg: #ffffff; 
+            --text: #1e293b; --border: #cbd5e1; --input-bg: #ffffff;
+            --dash-bg: #1e40af; --dash-text: #ffffff; /* Cores fixas pro painel */
+        }
+
+        /* Variáveis de Cores - Modo Escuro */
+        body.dark-mode {
+            --primary: #f8fafc; --accent: #3b82f6; --success: #4ade80; --warning: #fb923c; 
+            --purple: #a78bfa; --teal: #2dd4bf; --bg: #0f172a; --card-bg: #1e293b; 
+            --text: #f1f5f9; --border: #334155; --input-bg: #0f172a;
+            --dash-bg: #172554; --dash-text: #bfdbfe; 
+        }
+
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 15px; transition: background-color 0.3s, color 0.3s; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        /* Cabeçalho */
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--accent); padding-bottom: 10px; margin-bottom: 20px; }
+        h1 { color: var(--primary); margin: 0; font-size: 1.6em; display: flex; align-items: center; gap: 8px; }
+        .btn-theme { background: var(--card-bg); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.2s; white-space: nowrap; }
+        .btn-theme:hover { border-color: var(--accent); }
+        
+        h2 { color: var(--accent); margin-top: 0; font-size: 1.3em; }
+        h3 { font-size: 1.1em; color: var(--text); margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 5px; opacity: 0.9; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 15px; }
+        .card { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border); transition: all 0.3s ease; }
+        .highlight-card { border-top: 4px solid var(--success); }
+        .mode-card { border: 2px solid var(--purple); background: rgba(124, 58, 237, 0.02); }
+        
+        label { display: block; margin-top: 12px; font-weight: 600; font-size: 0.9em; color: var(--text); opacity: 0.9; }
+        input, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid var(--border); background-color: var(--input-bg); color: var(--text); border-radius: 8px; box-sizing: border-box; font-size: 16px; transition: 0.2s; }
+        input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+        
+        .input-row { display: flex; gap: 15px; }
+        .input-row > div { flex: 1; }
+
+        .result-box { background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--accent); padding: 15px; margin-top: 15px; border-radius: 8px; }
+        .monthly-box { background: rgba(22, 163, 74, 0.05); border-left: 4px solid var(--success); padding: 15px; margin-top: 15px; border-radius: 8px; }
+        .error { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; color: #ef4444; padding: 15px; margin-top: 15px; display: none; border-radius: 8px; font-weight: bold; font-size: 0.9em; }
+        .metric { font-size: 1.4em; font-weight: bold; color: var(--accent); }
+        .hidden { display: none !important; }
+        
+        /* Tabela e Dashboard Mobile */
+        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; background: var(--card-bg); font-size: 0.95em; min-width: 600px; }
+        th, td { padding: 12px 15px; border-bottom: 1px solid var(--border); text-align: left; color: var(--text); white-space: nowrap; }
+        th { background: rgba(0,0,0,0.03); font-weight: 600; }
+        
+        .dashboard-total { display: flex; justify-content: space-between; align-items: center; background: var(--dash-bg); color: var(--dash-text); padding: 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 15px; }
+        .dashboard-total h2 { margin: 0; color: white; border: none; font-size: 1.4em; }
+        .dashboard-total .big-number { font-size: 2.2em; color: #4ade80; font-weight: bold; line-height: 1; margin-top: 5px; }
+        
+        /* Botões */
+        button.action-btn { background: var(--success); color: white; border: none; padding: 14px 20px; font-size: 1.1em; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 20px; transition: background-color 0.2s, transform 0.1s; }
+        button.action-btn:active { transform: scale(0.98); }
+        button.action-btn:hover { background: #15803d; }
+        
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-export { background: var(--primary); color: var(--bg); border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; text-align: center; font-size: 0.9em; }
+        .btn-export.pdf { background: #ef4444; color: white; }
+        .btn-export.excel { background: #10b981; color: white; }
+        
+        /* --- MEDIA QUERIES PARA CELULAR (Mobile Impecável) --- */
+        @media (max-width: 768px) {
+            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .btn-theme { width: 100%; text-align: center; }
+            .grid { grid-template-columns: 1fr; gap: 15px; }
+            .input-row { flex-direction: column; gap: 0px; }
+            .dashboard-total { flex-direction: column; text-align: center; justify-content: center; }
+            .dashboard-total > div { text-align: center !important; }
+            .btn-group { flex-direction: column; }
+            .card { padding: 15px; }
+            .result-box p, .monthly-box p { font-size: 0.95em; }
+        }
+
+        /* Impressão PDF */
+        @media print {
+            body * { visibility: hidden; }
+            #area_tabela_salvos, #area_tabela_salvos * { visibility: visible; }
+            #area_tabela_salvos { position: absolute; left: 0; top: 0; width: 100%; border: none; box-shadow: none; }
+            .btn-group, .btn-excluir { display: none !important; }
+            body { background: white; color: black; }
+            .dashboard-total { background: #f1f5f9 !important; border: 2px solid black; color: black !important; }
+            .dashboard-total h2, .dashboard-total span { color: black !important; }
+            .dashboard-total .big-number { color: #16a34a !important; }
+        }
